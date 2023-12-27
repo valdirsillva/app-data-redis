@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    build: ./app-redis-python
+    container_name: app
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/code
+    networks:
+      - webnet
+
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    networks:
+      - webnet
+    volumes:
+      - cache:/usr/local/redis/data
+
+networks:
+  webnet:
+
+
+volumes:
+  cache:
